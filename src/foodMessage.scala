@@ -20,8 +20,8 @@ class FoodMessage(val rName: String, val address: String, val longitude: String,
 
   def asJsValue(): JsValue ={
     val messageMap: Map[String, JsValue] = Map("restaurant" -> Json.toJson(rName), "address" -> Json.toJson(address),
-      "longitude" -> Json.toJson(longitude), "latitude" -> Json.toJson(latitude), "load size" -> Json.toJson(loadSize),
-      "nearest food bank" -> Json.toJson(nearestBank))
+    "longitude" -> Json.toJson(longitude), "latitude" -> Json.toJson(latitude), "load size" -> Json.toJson(loadSize),
+    "nearest food bank" -> Json.toJson(nearestBank))
     Json.toJson(messageMap)
   }
 }
