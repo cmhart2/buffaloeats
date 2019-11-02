@@ -10,7 +10,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Scala 1.8.0_141" project-jdk-type="JavaSDK" />
+  <component name="PyCharmProfessionalAdvertiser">
+    <option name="shown" value="true" />
   </component>
 </project>

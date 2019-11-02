@@ -1,7 +1,7 @@
 
 import com.corundumstudio.socketio.listener.{DataListener, DisconnectListener}
-import com.corundumstudio.socketio.{AckRequest, Configuration, SocketIOClient, SocketIOServer}
-import play.api.libs.json.{JsValue, Json}
+import com.corundumstudio.socketio.{AckRequest, SocketIOClient, SocketIOServer}
+import javax.security.auth.login.Configuration
 
 class server {
 
