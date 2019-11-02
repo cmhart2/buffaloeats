@@ -17,36 +17,36 @@ class server {
 
   server.addDisconnectListener(new DisconnectionListener(this))
   server.addEventListener("register", classOf[String], new RegisterListener(this))
-  server.addEventListener("chat_message", classOf[String], new ChatMessageListener(this))
+  server.addEventListener("message", classOf[String], new FoodMessageListener(this))
 
   server.start()
 
   def chatHistoryJSON():String = {
-    val messages: List[ChatMessage] = ChatDatabase.accessFullChat()
-    val messagesJSON: List[JsValue] = messages.map((message: ChatMessage) => message.asJsValue())
+    val messages: List[FoodMessage] = FoodDatabase.accessFullChat()
+    val messagesJSON: List[JsValue] = messages.map((message: FoodMessage) => message.asJsValue())
     Json.stringify(Json.toJson(messagesJSON))
   }
 
 }
 
-object ChatServer {
+object FoodServer {
   def main(args: Array[String]): Unit = {
-    new ChatServer()
+    new FoodServer()
   }
 }
 
 
 
-class RegisterListener(server: ChatServer) extends DataListener[String] {
+class RegisterListener(server: FoodServer) extends DataListener[String] {
   override def onData(socket: SocketIOClient, username: String, ackRequest: AckRequest): Unit = {
     println(username + " registered in the chat with socket " + socket)
     server.socketToUsername += (socket -> username)
     server.usernameToSocket += (username -> socket)
-    socket.sendEvent("chat_history", server.chatHistoryJSON())
+    socket.sendEvent("food_history", server.foodHistoryJSON())
   }
 }
 
-class DisconnectionListener(server: ChatServer) extends DisconnectListener {
+class DisconnectionListener(server: FoodServer) extends DisconnectListener {
   override def onDisconnect(socket: SocketIOClient): Unit = {
     if(server.socketToUsername.contains(socket)){
       val username = server.socketToUsername(socket)
@@ -63,7 +63,7 @@ class ChatMessageListener(server: ChatServer) extends DataListener[String] {
       val username = server.socketToUsername(socket)
       println("received message: " + message + " from " + username)
       ChatDatabase.storeMessage(username, message)
-      server.server.getBroadcastOperations.sendEvent("chat_history", server.chatHistoryJSON())
+      server.server.getBroadcastOperations.sendEvent("food_history", server.chatHistoryJSON())
     }
   }
 

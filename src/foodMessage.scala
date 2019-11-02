@@ -1,6 +1,6 @@
 import play.api.libs.json.{JsValue, Json}
 
-object foodMessage {
+object FoodMessage {
 
   def fromJSON(json: String): FoodMessage = {
     val jsonValue = Json.parse(json)
